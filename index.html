@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popup Example</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;600&display=swap" rel="stylesheet">
+  
+  <style>
+    #popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 12px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      z-index: 999;
+    }
+
+    .styledClass {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="popup">
+    <p>This is your popup content!</p>
+  </div>
+
+  <script>
+
+    let quotes = [
+      "Sometimes a delay in yours plan is WhaheGuru's protection.",
+      "You embrace your individuality.",
+      "You are living in the best time of your life.",
+      "You have everything you need to success.",
+      "You deserve the best.",
+      "You can face any challenge.",
+      "You have let go the past.",
+      "Today is a great day.",
+      "I look the future with hope."
+    ];
+    let dur = 5 / 60; // In minutes
+
+    let randomIndex = Math.floor(Math.random() * quotes.length);
+
+    // Function to display the popup
+    function showPopup() {
+      Toastify({
+        node: createCustomHTML(),
+        duration: -1,
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, #00b09b, #96c93d)",
+          width: "307px",
+          height: "132px",
+          borderRadius: "24px"
+        },
+        onClick: function () { } // Callback after click
+      }).showToast();
+      document.querySelector("body > div.toastify.on.toastify-right.toastify-top > button").classList.add("styledClass")
+
+      // Get the existing div
+      var toastifyDiv = document.querySelector('.toastify');
+
+      // Create an image element
+      var imageElement = document.createElement('img');
+      imageElement.src = 'https://lh3.googleusercontent.com/a/AEdFTp57tP8YTE-875YQ2NvmtBIJtLRaMP1eCvJOtJj2mQ=s96-c'; // Set the image source
+      imageElement.alt = 'User Image';
+      imageElement.style.width = '56px';
+      imageElement.style.height = '56px';
+      imageElement.style.borderRadius = "43%";
+      imageElement.style.borderTopLeftRadius = "15px";
+
+      toastifyDiv.insertBefore(imageElement, toastifyDiv.firstChild);
+      document.querySelector("body > div.toastify.on.toastify-right.toastify-top").style.padding = "12px";
+      document.querySelector("body > div.toastify.on.toastify-right.toastify-top > button").setAttribute("onclick", "showAgainPopup()");
+      // Create an Audio object with the path to your MP3 file
+      var audio = new Audio('/linked_in_in_connetion.mp3');
+
+      // Play the audio
+      audio.play();
+    }
+
+    function showAgainPopup() {
+      setTimeout(showPopup, 1000 * 60 * dur);
+    }
+
+
+    function createCustomHTML() {
+      // Create a div with your HTML content
+      var customDiv = document.createElement('div');
+      customDiv.innerHTML = `<div style="margin: 10px;font-family: Nunito;"><h3 style="margin: 10px;margin-bottom: 0px;position: fixed;top: 15px;right: 127px;">Hi Vijay ! 👋</h3><p style="margin: 10px;margin-top: 0px;"><span>&#8220;</span>${quotes[randomIndex]}</p></div>`;
+
+      // Style the div if needed
+      customDiv.style.color = 'white';
+
+      return customDiv;
+    }
+
+    setTimeout(showPopup, dur);
+
+  </script>
+
+</body>
+
+</html>
